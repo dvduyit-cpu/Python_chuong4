@@ -34,13 +34,14 @@ button{border:0;padding:9px 12px;border-radius:8px;font-weight:bold;cursor:point
 <h2>CHƯƠNG 4 – HÀM, MÔ-ĐUN, GÓI; PEP 8 VÀ TYPE HINTS</h2>
 <p><b>Thời gian:</b> 8 giờ</p>
 <div class="note"><b>Mạch kiến thức:</b> đoạn code lặp lại → hàm; nhiều hàm liên quan → module; nhiều module liên quan → package; toàn bộ code được viết rõ ràng bằng docstring, type hints và PEP 8.</div>
-<div class="teacher"><b>Cách giảng:</b> mỗi khái niệm trong bản này chỉ xuất hiện một lần. Phần lý thuyết được mở rộng từ khái niệm → lý do dùng → cách hoạt động → khi nào nên dùng → ví dụ. Các đoạn code đều có chú thích giải thích gần như từng bước, và có kết quả chạy ngay bên dưới để sinh viên đối chiếu.</div>
+<div class="teacher"><b>Cách giảng:</b> giới thiệu khái niệm bằng ví dụ ngắn, sau đó cho sinh viên tự làm các bài tập từ dễ đến khó. Phần lý thuyết được mở rộng từ khái niệm → lý do dùng → cách hoạt động → khi nào nên dùng → ví dụ. Các đoạn code đều có chú thích giải thích gần như từng bước, và có kết quả chạy ngay bên dưới để sinh viên đối chiếu.</div>
 <div class="toolbar"><button onclick="showAll()">Hiện tất cả lời giải</button><button class="secondary" onclick="hideAll()">Ẩn tất cả lời giải</button><button class="secondary" onclick="window.print()">In bài giảng</button></div>
 </section>
 
 <section id="ham">
 
 <h2>1. HÀM – KHÁI NIỆM, CÁCH HOẠT ĐỘNG VÀ CÁCH DÙNG</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Hàm là một công việc được đặt tên. Viết def là mô tả công việc; gọi tên kèm () mới là nhờ Python làm việc đó. Hãy bắt đầu bằng hàm chỉ in một dòng, rồi mới thêm dữ liệu đầu vào.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 1.1 đến 1.5.</p></div>
 
 <h3>1.1. Hàm là gì?</h3>
 <p>Hàm là một nhóm câu lệnh được đặt tên để thực hiện một nhiệm vụ cụ thể. Khi cần thực hiện nhiệm vụ đó, ta chỉ cần gọi tên hàm thay vì viết lại toàn bộ đoạn code.</p>
@@ -177,11 +178,48 @@ Diện tích = 15.0</pre></div>
 </div>
 </div>
 
+
+<div class="practice-set" data-section="ham">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-1-1"><h4>Bài 1.1. Chào lớp học</h4><p><b>Yêu cầu:</b> Viết hàm chao_lop() in “Chào lớp!”. Gọi hàm một lần.</p><div class="guide"><b>Gợi ý từng bước:</b> Đặt print() bên trong hàm và thụt vào 4 dấu cách.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def chao_lop():
+    # Đây là việc hàm sẽ làm khi được gọi.
+    print(&quot;Chào lớp!&quot;)
+
+
+chao_lop()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào lớp!</pre></div></div></div>
+<div class="exercise" id="luyen-1-2"><h4>Bài 1.2. Chào theo tên</h4><p><b>Yêu cầu:</b> Viết chao(ten), sau đó chào An và Bình.</p><div class="guide"><b>Gợi ý từng bước:</b> ten là chỗ nhận dữ liệu; mỗi lần gọi có thể truyền một tên khác.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def chao(ten):
+    print(f&quot;Chào {ten}!&quot;)
+
+
+chao(&quot;An&quot;)
+chao(&quot;Bình&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào An!
+Chào Bình!</pre></div></div></div>
+<div class="exercise" id="luyen-1-3"><h4>Bài 1.3. In bình phương</h4><p><b>Yêu cầu:</b> Viết in_binh_phuong(so) để in số nhân với chính nó. Thử với 4.</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng so * so trong hàm.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def in_binh_phuong(so):
+    print(so * so)
+
+
+in_binh_phuong(4)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>16</pre></div></div></div>
+<div class="exercise" id="luyen-1-4"><h4>Bài 1.4. Dùng lại một hàm</h4><p><b>Yêu cầu:</b> Viết in_gach() in 5 dấu gạch ngang. Dùng hàm trước và sau dòng “Danh sách”.</p><div class="guide"><b>Gợi ý từng bước:</b> Chỉ định nghĩa một lần, nhưng gọi hai lần.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def in_gach():
+    print(&quot;-----&quot;)
+
+
+in_gach()
+print(&quot;Danh sách&quot;)
+in_gach()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>-----
+Danh sách
+-----</pre></div></div></div>
+<div class="exercise" id="luyen-1-5"><h4>Bài 1.5. Tính chu vi</h4><p><b>Yêu cầu:</b> Viết chu_vi(dai, rong) trả về chu vi hình chữ nhật. Thử dài 5, rộng 3.</p><div class="guide"><b>Gợi ý từng bước:</b> Chu vi = (dài + rộng) × 2; dùng return để lấy số đem in.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def chu_vi(dai, rong):
+    return (dai + rong) * 2
+
+
+print(chu_vi(5, 3))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>16</pre></div></div></div>
+</div>
 </section>
 
 <section id="scope">
 
 <h2>2. SCOPE – PHẠM VI BIẾN, LOCAL VÀ GLOBAL</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Hãy tưởng tượng mỗi lần chạy hàm là mở một căn phòng. Biến tạo trong hàm thuộc căn phòng đó; bên ngoài không gọi tên biến ấy trực tiếp được. Biến ở ngoài hàm có thể được đọc từ trong hàm.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 2.1 đến 2.5.</p></div>
 
 <h3>2.1. Scope là gì?</h3>
 <p>Scope là phạm vi mà một biến có thể được truy cập. Không phải biến nào cũng có thể dùng ở mọi vị trí trong chương trình.</p>
@@ -264,11 +302,59 @@ print(count)</code></pre>
 <b>Khuyến nghị:</b> ưu tiên truyền dữ liệu vào hàm qua tham số và lấy dữ liệu ra bằng return thay vì dùng global.
 </div>
 
+
+<div class="practice-set" data-section="scope">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-2-1"><h4>Bài 2.1. Biến trong hàm</h4><p><b>Yêu cầu:</b> Tạo ten = “An” bên trong gioi_thieu() và in tên khi gọi hàm.</p><div class="guide"><b>Gợi ý từng bước:</b> Đặt cả phép gán và print() trong hàm.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def gioi_thieu():
+    ten = &quot;An&quot;
+    print(ten)
+
+
+gioi_thieu()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>An</pre></div></div></div>
+<div class="exercise" id="luyen-2-2"><h4>Bài 2.2. Đọc biến ngoài hàm</h4><p><b>Yêu cầu:</b> Tạo truong = “BDU” ngoài hàm. Viết in_truong() đọc và in biến đó.</p><div class="guide"><b>Gợi ý từng bước:</b> Chỉ đọc biến nên không cần global.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>truong = &quot;BDU&quot;
+
+
+def in_truong():
+    print(truong)
+
+
+in_truong()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>BDU</pre></div></div></div>
+<div class="exercise" id="luyen-2-3"><h4>Bài 2.3. Hai biến cùng tên</h4><p><b>Yêu cầu:</b> Tạo so = 10 ngoài hàm, so = 3 trong hàm. In biến trong hàm rồi biến ngoài hàm.</p><div class="guide"><b>Gợi ý từng bước:</b> Hai biến cùng cách viết nhưng thuộc hai phạm vi khác nhau.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>so = 10
+
+
+def xem_so():
+    so = 3
+    print(&quot;Trong hàm:&quot;, so)
+
+
+xem_so()
+print(&quot;Ngoài hàm:&quot;, so)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Trong hàm: 3
+Ngoài hàm: 10</pre></div></div></div>
+<div class="exercise" id="luyen-2-4"><h4>Bài 2.4. Sửa bộ đếm toàn cục</h4><p><b>Yêu cầu:</b> Tạo dem = 0. Viết tang() dùng global để tăng dem thêm 1. Gọi hai lần.</p><div class="guide"><b>Gợi ý từng bước:</b> Khai báo global dem trước câu lệnh dem += 1.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>dem = 0
+
+
+def tang():
+    global dem
+    dem += 1
+
+
+tang()
+tang()
+print(dem)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>2</pre></div></div></div>
+<div class="exercise" id="luyen-2-5"><h4>Bài 2.5. Mang dữ liệu ra khỏi hàm</h4><p><b>Yêu cầu:</b> Viết tao_loi_chao() tạo biến cục bộ loi_chao rồi trả nó về. In kết quả bên ngoài.</p><div class="guide"><b>Gợi ý từng bước:</b> Không truy cập trực tiếp biến cục bộ; nhận giá trị qua return.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tao_loi_chao():
+    loi_chao = &quot;Chào bạn&quot;
+    return loi_chao
+
+
+ket_qua = tao_loi_chao()
+print(ket_qua)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào bạn</pre></div></div></div>
+</div>
 </section>
 
 <section id="thamso">
 
 <h2>3. THAM SỐ VÀ ĐỐI SỐ</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Tham số là tên chỗ trống khi viết hàm, ví dụ ten trong def chao(ten). Đối số là dữ liệu thật điền vào chỗ đó, ví dụ “An” trong chao(&quot;An&quot;). Truyền theo vị trí thì cần đúng thứ tự; truyền theo tên thì ghi rõ tên tham số.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 3.1 đến 3.5.</p></div>
 
 <h3>3.1. Parameter và argument khác nhau thế nào?</h3>
 <p><b>Parameter</b> là tên biến trong phần định nghĩa hàm. <b>Argument</b> là giá trị thật được truyền vào khi gọi hàm.</p>
@@ -376,11 +462,45 @@ city: Ca Mau</pre></div>
 <tr><td>**kwargs</td><td>Thông tin linh hoạt dạng tên=giá trị</td></tr>
 </table>
 
+
+<div class="practice-set" data-section="thamso">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-3-1"><h4>Bài 3.1. Truyền theo vị trí</h4><p><b>Yêu cầu:</b> Viết gioi_thieu(ten, tuoi) và gọi với “An”, 18.</p><div class="guide"><b>Gợi ý từng bước:</b> Đối số thứ nhất vào ten, đối số thứ hai vào tuoi.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def gioi_thieu(ten, tuoi):
+    print(f&quot;{ten}, {tuoi} tuổi&quot;)
+
+
+gioi_thieu(&quot;An&quot;, 18)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>An, 18 tuổi</pre></div></div></div>
+<div class="exercise" id="luyen-3-2"><h4>Bài 3.2. Truyền theo tên</h4><p><b>Yêu cầu:</b> Dùng cùng hàm gioi_thieu nhưng truyền tuoi trước ten bằng tên tham số.</p><div class="guide"><b>Gợi ý từng bước:</b> Viết tuoi=18 và ten=&quot;An&quot; khi gọi.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def gioi_thieu(ten, tuoi):
+    print(f&quot;{ten}, {tuoi} tuổi&quot;)
+
+
+gioi_thieu(tuoi=18, ten=&quot;An&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>An, 18 tuổi</pre></div></div></div>
+<div class="exercise" id="luyen-3-3"><h4>Bài 3.3. Giá trị mặc định</h4><p><b>Yêu cầu:</b> Viết chao(ten, loi=&quot;Xin chào&quot;). Gọi một lần dùng lời mặc định và một lần dùng “Chào buổi sáng”.</p><div class="guide"><b>Gợi ý từng bước:</b> Đối số được truyền vào sẽ thay giá trị mặc định.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def chao(ten, loi=&quot;Xin chào&quot;):
+    print(f&quot;{loi} {ten}&quot;)
+
+
+chao(&quot;An&quot;)
+chao(&quot;Bình&quot;, &quot;Chào buổi sáng&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Xin chào An
+Chào buổi sáng Bình</pre></div></div></div>
+<div class="exercise" id="luyen-3-4"><h4>Bài 3.4. Nhiều số với *args</h4><p><b>Yêu cầu:</b> Viết tong(*cac_so) và tính tổng 2, 4, 6.</p><div class="guide"><b>Gợi ý từng bước:</b> *cac_so gom các đối số vị trí thành một tuple; dùng sum().</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tong(*cac_so):
+    return sum(cac_so)
+
+
+print(tong(2, 4, 6))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>12</pre></div></div></div>
+<div class="exercise" id="luyen-3-5"><h4>Bài 3.5. Thông tin với **kwargs</h4><p><b>Yêu cầu:</b> Viết in_thong_tin(**thong_tin). Gọi với ten=&quot;An&quot;, lop=&quot;CNTT&quot; và in từng cặp.</p><div class="guide"><b>Gợi ý từng bước:</b> Duyệt thong_tin.items() để nhận khóa và giá trị.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def in_thong_tin(**thong_tin):
+    for ten, gia_tri in thong_tin.items():
+        print(f&quot;{ten}: {gia_tri}&quot;)
+
+
+in_thong_tin(ten=&quot;An&quot;, lop=&quot;CNTT&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>ten: An
+lop: CNTT</pre></div></div></div>
+</div>
 </section>
 
 <section id="return">
 
 <h2>4. RETURN – TRẢ KẾT QUẢ TỪ HÀM</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>print giống như nói kết quả ra màn hình. return giống như đưa kết quả cho người gọi giữ và dùng tiếp. Gặp return, lần chạy hàm đó kết thúc ngay; phần lệnh phía sau trong hàm không chạy nữa.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 4.1 đến 4.5.</p></div>
 
 <h3>4.1. Vì sao cần return?</h3>
 <p><code>print()</code> chỉ hiển thị dữ liệu. <code>return</code> đưa dữ liệu ra khỏi hàm để chương trình có thể lưu, tính tiếp hoặc truyền sang hàm khác.</p>
@@ -453,11 +573,51 @@ print("Tích:", product)</code></pre>
 Hiệu: 7
 Tích: 30</pre></div>
 
+
+<div class="practice-set" data-section="return">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-4-1"><h4>Bài 4.1. Nhận tổng</h4><p><b>Yêu cầu:</b> Viết cong(a, b) trả tổng. Lưu cong(2, 3) vào ket_qua rồi in.</p><div class="guide"><b>Gợi ý từng bước:</b> Trong hàm dùng return, bên ngoài dùng print.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def cong(a, b):
+    return a + b
+
+
+ket_qua = cong(2, 3)
+print(ket_qua)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>5</pre></div></div></div>
+<div class="exercise" id="luyen-4-2"><h4>Bài 4.2. Dùng kết quả để tính tiếp</h4><p><b>Yêu cầu:</b> Viết nhan_doi(so). Lấy kết quả của 4 rồi cộng thêm 1.</p><div class="guide"><b>Gợi ý từng bước:</b> Có thể dùng giá trị trả về trong một phép tính khác.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def nhan_doi(so):
+    return so * 2
+
+
+print(nhan_doi(4) + 1)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>9</pre></div></div></div>
+<div class="exercise" id="luyen-4-3"><h4>Bài 4.3. Thoát sớm</h4><p><b>Yêu cầu:</b> Viết kiem_tra(tuoi): nếu tuổi âm trả “Không hợp lệ”, còn lại trả “Hợp lệ”. Thử -1 và 18.</p><div class="guide"><b>Gợi ý từng bước:</b> Đặt return cho trường hợp không hợp lệ trước.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def kiem_tra(tuoi):
+    if tuoi &lt; 0:
+        return &quot;Không hợp lệ&quot;
+    return &quot;Hợp lệ&quot;
+
+
+print(kiem_tra(-1))
+print(kiem_tra(18))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Không hợp lệ
+Hợp lệ</pre></div></div></div>
+<div class="exercise" id="luyen-4-4"><h4>Bài 4.4. Quan sát None</h4><p><b>Yêu cầu:</b> Viết chao() chỉ in “Chào”. In cả giá trị mà chao() trả về.</p><div class="guide"><b>Gợi ý từng bước:</b> Hàm không return rõ ràng sẽ trả None.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def chao():
+    print(&quot;Chào&quot;)
+
+
+ket_qua = chao()
+print(ket_qua)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào
+None</pre></div></div></div>
+<div class="exercise" id="luyen-4-5"><h4>Bài 4.5. Nhận hai kết quả</h4><p><b>Yêu cầu:</b> Viết tinh(a, b) trả tổng và tích. Thử 3, 4 rồi gán vào hai biến.</p><div class="guide"><b>Gợi ý từng bước:</b> return a + b, a * b tạo một tuple; dùng hai biến để giải nén.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tinh(a, b):
+    return a + b, a * b
+
+
+tong, tich = tinh(3, 4)
+print(&quot;Tổng:&quot;, tong)
+print(&quot;Tích:&quot;, tich)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Tổng: 7
+Tích: 12</pre></div></div></div>
+</div>
 </section>
 
 <section id="doc">
 
 <h2>5. DOCSTRING VÀ TYPE HINTS</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Docstring là lời hướng dẫn đặt ngay đầu thân hàm để nói hàm làm gì. Type hints là nhãn ghi kiểu dữ liệu dự kiến: đầu vào nhận gì, đầu ra trả gì. Các nhãn này giúp đọc code; Python không tự kiểm tra mọi kiểu dữ liệu lúc chạy.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 5.1 đến 5.5.</p></div>
 
 <h3>5.1. Docstring là gì?</h3>
 <p>Docstring là phần mô tả chính thức của hàm, class hoặc module. Nó được đặt ngay sau dòng định nghĩa.</p>
@@ -529,11 +689,48 @@ print(f"{result:.2f}")</code></pre>
 <li>Muốn IDE cảnh báo lỗi sớm.</li>
 </ul>
 
+
+<div class="practice-set" data-section="doc">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-5-1"><h4>Bài 5.1. Thêm mô tả hàm</h4><p><b>Yêu cầu:</b> Viết cong(a, b) có docstring “Trả về tổng hai số.” rồi in cong.__doc__.</p><div class="guide"><b>Gợi ý từng bước:</b> Đặt chuỗi ba dấu nháy ngay sau dòng def.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def cong(a, b):
+    &quot;&quot;&quot;Trả về tổng hai số.&quot;&quot;&quot;
+    return a + b
+
+
+print(cong.__doc__)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Trả về tổng hai số.</pre></div></div></div>
+<div class="exercise" id="luyen-5-2"><h4>Bài 5.2. Ghi kiểu số nguyên</h4><p><b>Yêu cầu:</b> Viết gap_doi nhận int và trả int. Thử 5.</p><div class="guide"><b>Gợi ý từng bước:</b> Cú pháp: def ten(tham_so: int) -&gt; int:</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def gap_doi(so: int) -&gt; int:
+    &quot;&quot;&quot;Nhân số nguyên với hai.&quot;&quot;&quot;
+    return so * 2
+
+
+print(gap_doi(5))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>10</pre></div></div></div>
+<div class="exercise" id="luyen-5-3"><h4>Bài 5.3. Ghi kiểu chuỗi</h4><p><b>Yêu cầu:</b> Viết tao_chao(ten: str) trả str. Thử “An”.</p><div class="guide"><b>Gợi ý từng bước:</b> Trả về f-string thay vì chỉ in trong hàm.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tao_chao(ten: str) -&gt; str:
+    &quot;&quot;&quot;Tạo lời chào theo tên.&quot;&quot;&quot;
+    return f&quot;Chào {ten}&quot;
+
+
+print(tao_chao(&quot;An&quot;))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào An</pre></div></div></div>
+<div class="exercise" id="luyen-5-4"><h4>Bài 5.4. Danh sách điểm</h4><p><b>Yêu cầu:</b> Viết trung_binh(diem: list[float]) -&gt; float. Từ chối danh sách rỗng bằng ValueError. Thử [6.0, 8.0].</p><div class="guide"><b>Gợi ý từng bước:</b> Kiểm tra if not diem trước khi chia cho len(diem).</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def trung_binh(diem: list[float]) -&gt; float:
+    &quot;&quot;&quot;Tính trung bình; báo ValueError nếu không có điểm.&quot;&quot;&quot;
+    if not diem:
+        raise ValueError(&quot;Danh sách điểm không được rỗng&quot;)
+    return sum(diem) / len(diem)
+
+
+print(trung_binh([6.0, 8.0]))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>7.0</pre></div></div></div>
+<div class="exercise" id="luyen-5-5"><h4>Bài 5.5. Hàm chỉ hiển thị</h4><p><b>Yêu cầu:</b> Viết hien_ten(ten: str) -&gt; None có docstring rồi gọi với “Bình”.</p><div class="guide"><b>Gợi ý từng bước:</b> -&gt; None cho biết hàm không cung cấp kết quả tính toán để dùng tiếp.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def hien_ten(ten: str) -&gt; None:
+    &quot;&quot;&quot;In tên ra màn hình.&quot;&quot;&quot;
+    print(ten)
+
+
+hien_ten(&quot;Bình&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Bình</pre></div></div></div>
+</div>
 </section>
 
 <section id="lambda">
 
 <h2>6. LAMBDA, MAP() VÀ FILTER()</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Lambda là cách viết một hàm có đúng một biểu thức. map áp dụng một hàm cho từng phần tử; filter giữ các phần tử làm điều kiện đúng. Dùng list(...) để nhìn thấy toàn bộ kết quả của map hoặc filter.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 6.1 đến 6.5.</p></div>
 
 <h3>6.1. Lambda là gì?</h3>
 <p>Lambda là cách tạo hàm ngắn, thường không cần đặt tên bằng <code>def</code>.</p>
@@ -606,11 +803,30 @@ print(passed_scores)</code></pre>
 Với sinh viên mới học, nên cho các bạn hiểu map/filter trước, sau đó so sánh với comprehension để biết cách nào dễ đọc hơn.
 </div>
 
+
+<div class="practice-set" data-section="lambda">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-6-1"><h4>Bài 6.1. Lambda cộng một</h4><p><b>Yêu cầu:</b> Tạo lambda nhận x và trả x + 1. Gọi với 4.</p><div class="guide"><b>Gợi ý từng bước:</b> Mẫu: ten = lambda x: biểu_thức.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>tang_mot = lambda x: x + 1
+print(tang_mot(4))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>5</pre></div></div></div>
+<div class="exercise" id="luyen-6-2"><h4>Bài 6.2. Nhân đôi danh sách</h4><p><b>Yêu cầu:</b> Dùng map và lambda để nhân đôi [1, 2, 3].</p><div class="guide"><b>Gợi ý từng bước:</b> Hàm xử lý một số; map lo việc lặp qua danh sách.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>cac_so = [1, 2, 3]
+ket_qua = list(map(lambda x: x * 2, cac_so))
+print(ket_qua)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>[2, 4, 6]</pre></div></div></div>
+<div class="exercise" id="luyen-6-3"><h4>Bài 6.3. Giữ số chẵn</h4><p><b>Yêu cầu:</b> Dùng filter để lấy số chẵn trong [1, 2, 3, 4].</p><div class="guide"><b>Gợi ý từng bước:</b> Số chẵn có x % 2 == 0.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>cac_so = [1, 2, 3, 4]
+so_chan = list(filter(lambda x: x % 2 == 0, cac_so))
+print(so_chan)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>[2, 4]</pre></div></div></div>
+<div class="exercise" id="luyen-6-4"><h4>Bài 6.4. Đổi chuỗi thành số</h4><p><b>Yêu cầu:</b> Dùng map(int, ...) đổi [&quot;10&quot;, &quot;20&quot;, &quot;30&quot;] thành danh sách số nguyên.</p><div class="guide"><b>Gợi ý từng bước:</b> Có thể truyền hàm int trực tiếp, không cần lambda.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>du_lieu = [&quot;10&quot;, &quot;20&quot;, &quot;30&quot;]
+cac_so = list(map(int, du_lieu))
+print(cac_so)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>[10, 20, 30]</pre></div></div></div>
+<div class="exercise" id="luyen-6-5"><h4>Bài 6.5. Viết lại bằng comprehension</h4><p><b>Yêu cầu:</b> Lấy bình phương các số dương trong [-2, 0, 3, 4] bằng list comprehension.</p><div class="guide"><b>Gợi ý từng bước:</b> Đặt phép tính trước for và điều kiện sau if.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>cac_so = [-2, 0, 3, 4]
+ket_qua = [x * x for x in cac_so if x &gt; 0]
+print(ket_qua)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>[9, 16]</pre></div></div></div>
+</div>
 </section>
 
 <section id="module">
 
 <h2>7. MÔ-ĐUN VÀ IMPORT</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Module thường là một file .py. import là nạp file đó để dùng các hàm bên trong. Với bài nhiều file, hãy tạo đủ các file trong cùng thư mục rồi chạy main.py; không dán tất cả vào một file.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 7.1 đến 7.5.</p></div>
 
 <h3>7.1. Mô-đun là gì?</h3>
 <p>Mỗi file Python <code>.py</code> có thể được xem là một mô-đun. Mô-đun thường chứa các hàm hoặc class cùng chủ đề.</p>
@@ -681,11 +897,39 @@ print(calculator.subtract(10, 3))</code></pre>
 Không nên dùng <code>from module import *</code> vì khó biết tên nào được import từ đâu.
 </div>
 
+
+<div class="practice-set" data-section="module">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-7-1"><h4>Bài 7.1. Dùng math</h4><p><b>Yêu cầu:</b> Import math rồi tính căn bậc hai của 81.</p><div class="guide"><b>Gợi ý từng bước:</b> Gọi math.sqrt(81).</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>import math
+
+print(math.sqrt(81))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>9.0</pre></div></div></div>
+<div class="exercise" id="luyen-7-2"><h4>Bài 7.2. Import riêng một hàm</h4><p><b>Yêu cầu:</b> Lấy ceil từ math để làm tròn 3.2 lên số nguyên.</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng from math import ceil rồi gọi ceil().</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>from math import ceil
+
+print(ceil(3.2))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>4</pre></div></div></div>
+<div class="exercise" id="luyen-7-3"><h4>Bài 7.3. Đặt bí danh</h4><p><b>Yêu cầu:</b> Import math với tên m rồi tính giai thừa của 5.</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng import math as m và m.factorial(5).</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>import math as m
+
+print(m.factorial(5))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>120</pre></div></div></div>
+<div class="exercise" id="luyen-7-4"><h4>Bài 7.4. Tự tạo module cộng</h4><p><b>Yêu cầu:</b> Tạo phep_tinh.py có cong(a, b). Tạo main.py import module và cộng 3, 5.</p><div class="guide"><b>Gợi ý từng bước:</b> Hai file nằm cùng thư mục. Chạy python3 main.py.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">phep_tinh.py</span></p><pre><code>def cong(a, b):
+    return a + b</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>import phep_tinh
+
+print(phep_tinh.cong(3, 5))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>8</pre></div></div></div>
+<div class="exercise" id="luyen-7-5"><h4>Bài 7.5. Dùng hai hàm của module</h4><p><b>Yêu cầu:</b> Tạo hinh_hoc.py có dien_tich và chu_vi hình vuông. Gọi cả hai với cạnh 4 từ main.py.</p><div class="guide"><b>Gợi ý từng bước:</b> Diện tích = cạnh × cạnh; chu vi = cạnh × 4.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">hinh_hoc.py</span></p><pre><code>def dien_tich(canh):
+    return canh * canh
+
+
+def chu_vi(canh):
+    return canh * 4</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from hinh_hoc import dien_tich, chu_vi
+
+print(dien_tich(4))
+print(chu_vi(4))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>16
+16</pre></div></div></div>
+</div>
 </section>
 
 <section id="package">
 
 <h2>8. PACKAGE VÀ CẤU TRÚC DỰ ÁN</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Package giúp nhóm các module vào một thư mục. Trong các bài này, tạo __init__.py để dùng cấu trúc package thông thường. Đứng tại thư mục chứa main.py để chạy python3 main.py; dấu chấm trong import chỉ đường đến module.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 8.1 đến 8.5.</p></div>
 
 <h3>8.1. Package là gì?</h3>
 <p>Package là thư mục chứa nhiều module liên quan.</p>
@@ -728,11 +972,43 @@ print(average(scores))</code></pre>
 Có thể giải thích: hàm = nhân viên; module = phòng ban; package = đơn vị gồm nhiều phòng ban.
 </div>
 
+
+<div class="practice-set" data-section="package">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-8-1"><h4>Bài 8.1. Package đầu tiên</h4><p><b>Yêu cầu:</b> Tạo thư mục tien_ich có __init__.py và loi_chao.py. Từ main.py gọi chao().</p><div class="guide"><b>Gợi ý từng bước:</b> main.py nằm bên ngoài tien_ich; __init__.py có thể để trống.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">tien_ich/__init__.py</span></p><pre><code># File khởi tạo package.</code></pre><p><b>File:</b> <span class="file">tien_ich/loi_chao.py</span></p><pre><code>def chao():
+    return &quot;Chào từ package&quot;</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from tien_ich.loi_chao import chao
+
+print(chao())</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Chào từ package</pre></div></div></div>
+<div class="exercise" id="luyen-8-2"><h4>Bài 8.2. Module toán trong package</h4><p><b>Yêu cầu:</b> Tạo tien_ich/toan.py có nhan(a, b), dùng từ main.py với 3, 4.</p><div class="guide"><b>Gợi ý từng bước:</b> Import theo đường dẫn tien_ich.toan.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">tien_ich/__init__.py</span></p><pre><code># Package tiện ích.</code></pre><p><b>File:</b> <span class="file">tien_ich/toan.py</span></p><pre><code>def nhan(a, b):
+    return a * b</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from tien_ich.toan import nhan
+
+print(nhan(3, 4))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>12</pre></div></div></div>
+<div class="exercise" id="luyen-8-3"><h4>Bài 8.3. Module xử lý chữ</h4><p><b>Yêu cầu:</b> Tạo tien_ich/chu.py có viet_hoa(ten), dùng từ main.py với “an”.</p><div class="guide"><b>Gợi ý từng bước:</b> Phương thức upper() đổi chuỗi sang chữ hoa.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">tien_ich/__init__.py</span></p><pre><code># Package tiện ích.</code></pre><p><b>File:</b> <span class="file">tien_ich/chu.py</span></p><pre><code>def viet_hoa(ten):
+    return ten.upper()</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from tien_ich.chu import viet_hoa
+
+print(viet_hoa(&quot;an&quot;))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>AN</pre></div></div></div>
+<div class="exercise" id="luyen-8-4"><h4>Bài 8.4. Dùng hai module</h4><p><b>Yêu cầu:</b> Tạo package hoc_tap gồm diem.py tính tổng điểm và nhan.py tạo tên lớp. Dùng cả hai trong main.py.</p><div class="guide"><b>Gợi ý từng bước:</b> Mỗi file phụ trách một việc; import từng hàm từ module tương ứng.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">hoc_tap/__init__.py</span></p><pre><code># Package học tập.</code></pre><p><b>File:</b> <span class="file">hoc_tap/diem.py</span></p><pre><code>def tong_diem(diem):
+    return sum(diem)</code></pre><p><b>File:</b> <span class="file">hoc_tap/nhan.py</span></p><pre><code>def ten_lop(ma):
+    return f&quot;Lớp {ma}&quot;</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from hoc_tap.diem import tong_diem
+from hoc_tap.nhan import ten_lop
+
+print(ten_lop(&quot;CNTT&quot;))
+print(tong_diem([7, 8, 9]))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Lớp CNTT
+24</pre></div></div></div>
+<div class="exercise" id="luyen-8-5"><h4>Bài 8.5. Hoàn thiện ví dụ average</h4><p><b>Yêu cầu:</b> Tạo utils/math_utils.py chứa average và dùng với [7.0, 8.0, 9.0]. Xử lý danh sách rỗng.</p><div class="guide"><b>Gợi ý từng bước:</b> Cần viết phần định nghĩa hàm trong module trước khi import.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">utils/__init__.py</span></p><pre><code># Package các hàm dùng chung.</code></pre><p><b>File:</b> <span class="file">utils/math_utils.py</span></p><pre><code>def average(scores: list[float]) -&gt; float:
+    &quot;&quot;&quot;Tính trung bình của danh sách không rỗng.&quot;&quot;&quot;
+    if not scores:
+        raise ValueError(&quot;Cần ít nhất một điểm&quot;)
+    return sum(scores) / len(scores)</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from utils.math_utils import average
+
+print(average([7.0, 8.0, 9.0]))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>8.0</pre></div></div></div>
+</div>
 </section>
 
 <section id="main">
 
 <h2>9. __name__ == "__main__"</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Khi chạy python3 main.py, Python đặt __name__ của file đó thành &quot;__main__&quot;. Khi import file, __name__ là tên module. Khối if __name__ == &quot;__main__&quot;: giúp phần chạy thử chỉ hoạt động lúc chạy trực tiếp.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 9.1 đến 9.5.</p></div>
 
 <h3>9.1. __name__ là gì?</h3>
 <p>Mỗi file Python có biến đặc biệt <code>__name__</code>.</p>
@@ -780,11 +1056,49 @@ if __name__ == "__main__":
 <b>Cách nói với sinh viên:</b> câu này hỏi “file này đang tự chạy hay chỉ đang được file khác mượn dùng?”.
 </div>
 
+
+<div class="practice-set" data-section="main">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-9-1"><h4>Bài 9.1. Xem tên khi chạy trực tiếp</h4><p><b>Yêu cầu:</b> Viết bai.py in __name__ rồi chạy python3 bai.py.</p><div class="guide"><b>Gợi ý từng bước:</b> __name__ là biến Python tự tạo.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>print(__name__)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>__main__</pre></div></div></div>
+<div class="exercise" id="luyen-9-2"><h4>Bài 9.2. Gọi main bằng main guard</h4><p><b>Yêu cầu:</b> Viết main() in “Bắt đầu” rồi gọi qua main guard.</p><div class="guide"><b>Gợi ý từng bước:</b> Dòng main() nằm bên trong if.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def main():
+    print(&quot;Bắt đầu&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Bắt đầu</pre></div></div></div>
+<div class="exercise" id="luyen-9-3"><h4>Bài 9.3. Hàm hỗ trợ và main</h4><p><b>Yêu cầu:</b> Viết cong(a, b), main() in cong(4, 5), cuối file có main guard.</p><div class="guide"><b>Gợi ý từng bước:</b> Định nghĩa hàm trước, gọi trong main.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def cong(a, b):
+    return a + b
+
+
+def main():
+    print(cong(4, 5))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>9</pre></div></div></div>
+<div class="exercise" id="luyen-9-4"><h4>Bài 9.4. Import không chạy demo</h4><p><b>Yêu cầu:</b> Tạo thu_vien.py có cong() và một print demo trong main guard. Từ main.py import rồi in cong(1, 2).</p><div class="guide"><b>Gợi ý từng bước:</b> Khi import, dòng in demo phải được bỏ qua.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">thu_vien.py</span></p><pre><code>def cong(a, b):
+    return a + b
+
+
+if __name__ == &quot;__main__&quot;:
+    print(&quot;Demo chỉ chạy trực tiếp&quot;)</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from thu_vien import cong
+
+print(cong(1, 2))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>3</pre></div></div></div>
+<div class="exercise" id="luyen-9-5"><h4>Bài 9.5. So sánh hai cách chạy</h4><p><b>Yêu cầu:</b> Tạo ten_module.py có ham ten() trả __name__. Import từ main.py và in kết quả.</p><div class="guide"><b>Gợi ý từng bước:</b> Lúc này __name__ trong module là ten_module, không phải __main__.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">ten_module.py</span></p><pre><code>def ten():
+    return __name__
+
+
+if __name__ == &quot;__main__&quot;:
+    print(ten())</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>import ten_module
+
+print(ten_module.ten())</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>ten_module</pre></div></div></div>
+</div>
 </section>
 
 <section id="pep8">
 
 <h2>10. PEP 8 – VIẾT CODE DỄ ĐỌC VÀ NHẤT QUÁN</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>PEP 8 giúp nhiều người đọc code dễ hơn: tên rõ nghĩa, thụt lề 4 dấu cách và khoảng trắng hợp lý. Hãy phân biệt code chạy đúng với code dễ đọc: một đoạn có thể chạy được nhưng vẫn cần trình bày lại.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 10.1 đến 10.5.</p></div>
 
 <h3>10.1. PEP 8 là gì?</h3>
 <p>PEP 8 là hướng dẫn phong cách viết Python. Đây không phải cú pháp bắt buộc, nhưng giúp code dễ đọc, dễ sửa và dễ làm việc nhóm.</p>
@@ -835,11 +1149,38 @@ print(total_payment)</code></pre>
 
 <div class="result"><b>Kết quả:</b><pre>45000</pre></div>
 
+
+<div class="practice-set" data-section="pep8">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-10-1"><h4>Bài 10.1. Tên biến dễ hiểu</h4><p><b>Yêu cầu:</b> Thay các tên a, b bằng don_gia, so_luong khi tính 15000 × 3.</p><div class="guide"><b>Gợi ý từng bước:</b> Tên biến nên cho biết dữ liệu đó mang ý nghĩa gì.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>don_gia = 15000
+so_luong = 3
+thanh_tien = don_gia * so_luong
+print(thanh_tien)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>45000</pre></div></div></div>
+<div class="exercise" id="luyen-10-2"><h4>Bài 10.2. Khoảng trắng quanh toán tử</h4><p><b>Yêu cầu:</b> Viết lại tong=3+5 cho dễ đọc rồi in tổng.</p><div class="guide"><b>Gợi ý từng bước:</b> Thêm khoảng trắng quanh = và +.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>tong = 3 + 5
+print(tong)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>8</pre></div></div></div>
+<div class="exercise" id="luyen-10-3"><h4>Bài 10.3. Thụt lề</h4><p><b>Yêu cầu:</b> Viết kiem_tra(so) in “Dương” nếu so &gt; 0. Thử 2.</p><div class="guide"><b>Gợi ý từng bước:</b> Thân hàm thụt 4 dấu cách; thân if thụt thêm 4 dấu cách.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def kiem_tra(so):
+    if so &gt; 0:
+        print(&quot;Dương&quot;)
+
+
+kiem_tra(2)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Dương</pre></div></div></div>
+<div class="exercise" id="luyen-10-4"><h4>Bài 10.4. Tên hằng số</h4><p><b>Yêu cầu:</b> Tạo hằng SO_NGAY_TRONG_TUAN bằng 7 và tính số ngày trong 3 tuần.</p><div class="guide"><b>Gợi ý từng bước:</b> Tên hằng số viết hoa, các từ ngăn bằng dấu gạch dưới.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>SO_NGAY_TRONG_TUAN = 7
+
+so_tuan = 3
+print(so_tuan * SO_NGAY_TRONG_TUAN)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>21</pre></div></div></div>
+<div class="exercise" id="luyen-10-5"><h4>Bài 10.5. Trình bày một hàm</h4><p><b>Yêu cầu:</b> Viết tinh_tien(don_gia, so_luong) với docstring ngắn, khoảng trắng hợp lý, rồi thử 10000 và 2.</p><div class="guide"><b>Gợi ý từng bước:</b> Chừa hai dòng trống giữa hàm cấp module và phần gọi hàm.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tinh_tien(don_gia, so_luong):
+    &quot;&quot;&quot;Tính số tiền theo đơn giá và số lượng.&quot;&quot;&quot;
+    return don_gia * so_luong
+
+
+print(tinh_tien(10000, 2))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>20000</pre></div></div></div>
+</div>
 </section>
 
 <section id="tools">
 
 <h2>11. FORMATTER VÀ LINTER</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Formatter giống người sắp lại bàn ghế: chỉnh cách trình bày. Linter giống người dò lỗi: cảnh báo những chỗ đáng kiểm tra. Ruff có cả hai chức năng, nhưng phải gọi đúng lệnh: ruff format để định dạng, ruff check để kiểm tra. Công cụ không thay được việc chạy thử chương trình.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 11.1 đến 11.5.</p></div>
 
 <h3>11.1. Formatter là gì?</h3>
 <p>Formatter tự động sửa hình thức trình bày code.</p>
@@ -875,11 +1216,35 @@ print(total_payment)</code></pre>
 Trong dự án thực tế, thường dùng cả formatter và linter.
 </div>
 
+
+<div class="practice-set" data-section="tools">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-11-1"><h4>Bài 11.1. Nhận biết code cần format</h4><p><b>Yêu cầu:</b> Định dạng lại def cong(a,b): return a+b thành hàm nhiều dòng, sau đó chạy với 2 và 3.</p><div class="guide"><b>Gợi ý từng bước:</b> Có thể sửa tay trước; ở bài sau sẽ dùng công cụ.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def cong(a, b):
+    return a + b
+
+
+print(cong(2, 3))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>5</pre></div></div></div>
+<div class="exercise" id="luyen-11-2"><h4>Bài 11.2. Tìm import không dùng</h4><p><b>Yêu cầu:</b> Đoạn gốc có import math nhưng chỉ print(2 + 3). Loại bỏ import thừa rồi chạy.</p><div class="guide"><b>Gợi ý từng bước:</b> Linter thường báo F401 cho import chưa dùng; chỉ xóa khi thực sự không cần.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code># Không cần import math cho phép cộng này.
+print(2 + 3)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>5</pre></div></div></div>
+<div class="exercise" id="luyen-11-3"><h4>Bài 11.3. Sửa tên biến sai</h4><p><b>Yêu cầu:</b> Đoạn gốc gán diem = 8 nhưng lại print(diem_so). Sửa để in đúng biến.</p><div class="guide"><b>Gợi ý từng bước:</b> Linter có thể báo F821 cho tên chưa được định nghĩa.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>diem = 8
+print(diem)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>8</pre></div></div></div>
+<div class="exercise" id="luyen-11-4"><h4>Bài 11.4. Chạy formatter</h4><p><b>Yêu cầu:</b> Tạo bai.py từ lời giải, thử bỏ khoảng trắng, rồi dùng Ruff định dạng lại. Sau cùng chạy file.</p><div class="guide"><b>Gợi ý từng bước:</b> Trong môi trường Python riêng: python3 -m venv .venv; kích hoạt môi trường và python -m pip install ruff. Sau đó chạy python -m ruff format bai.py và python bai.py. Bài này cần cài công cụ, các bài khác không cần.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def nhan(a, b):
+    return a * b
+
+
+print(nhan(3, 4))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>12</pre></div></div></div>
+<div class="exercise" id="luyen-11-5"><h4>Bài 11.5. Kiểm tra rồi chạy lại</h4><p><b>Yêu cầu:</b> Tạo bai.py có cong() và lời gọi mẫu. Dùng Ruff kiểm tra trước khi chạy.</p><div class="guide"><b>Gợi ý từng bước:</b> Sau khi cài Ruff như bài 4, chạy python -m ruff check bai.py, python -m ruff format --check bai.py rồi python bai.py. Nếu có cảnh báo, đọc vị trí và sửa đúng nguyên nhân.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def cong(a, b):
+    return a + b
+
+
+print(cong(4, 6))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>10</pre></div></div></div>
+</div>
 </section>
 
 <section id="baitap">
 
 <h2>12. BÀI TẬP THỰC HÀNH – CÓ GỢI Ý VÀ CODE CHÚ THÍCH</h2>
+<div class="guide"><h3>Hiểu nhanh trước khi làm</h3><p>Phần này ghép các bước đã học thành việc nhỏ có đầu vào và đầu ra rõ ràng. Trước khi viết, hãy nói bằng lời: nhận dữ liệu nào, xử lý ra sao, cần trả kết quả gì. Làm từng bước rồi mới ghép lại; chưa cần nhập bàn phím.</p><p><b>Cách học:</b> đọc đề → tự viết → chạy thử → so sánh kết quả → cuối cùng mới mở lời giải. Các bài mới được đánh số 12.1 đến 12.5.</p></div>
 
 <div class="exercise">
 <h4>Bài 1. Hàm tính điểm trung bình</h4>
@@ -1037,6 +1402,72 @@ if __name__ == "__main__":
 </div>
 </div>
 
+
+<div class="practice-set" data-section="baitap">
+<h3>5 bài tập luyện thêm — từ dễ đến khó</h3>
+<div class="exercise" id="luyen-12-1"><h4>Bài 12.1. Tính tiền mua hàng</h4><p><b>Yêu cầu:</b> Viết tinh_tien(don_gia, so_luong). Trong main(), tính 3 quyển vở giá 12000 đồng/quyển.</p><div class="guide"><b>Gợi ý từng bước:</b> Tách phần tính toán khỏi phần in kết quả.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tinh_tien(don_gia: int, so_luong: int) -&gt; int:
+    &quot;&quot;&quot;Tính tiền mua hàng.&quot;&quot;&quot;
+    return don_gia * so_luong
+
+
+def main() -&gt; None:
+    print(f&quot;Thành tiền: {tinh_tien(12000, 3)} đồng&quot;)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Thành tiền: 36000 đồng</pre></div></div></div>
+<div class="exercise" id="luyen-12-2"><h4>Bài 12.2. Tìm điểm đạt</h4><p><b>Yêu cầu:</b> Viết loc_diem_dat(diem) trả các điểm từ 5 trở lên. Thử [4, 5, 7, 3, 9].</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng list comprehension; không chỉ in trong hàm.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def loc_diem_dat(diem: list[float]) -&gt; list[float]:
+    &quot;&quot;&quot;Giữ các điểm đạt từ 5 trở lên.&quot;&quot;&quot;
+    return [x for x in diem if x &gt;= 5]
+
+
+print(loc_diem_dat([4, 5, 7, 3, 9]))</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>[5, 7, 9]</pre></div></div></div>
+<div class="exercise" id="luyen-12-3"><h4>Bài 12.3. Đổi phút thành giờ và phút</h4><p><b>Yêu cầu:</b> Viết tach_thoi_gian(tong_phut) trả hai giá trị. Thử 135 phút.</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng // 60 lấy số giờ và % 60 lấy số phút còn lại.</div><p><b>Cách chạy:</b> Lưu code vào <code>bai.py</code> trong thư mục riêng cho bài này rồi chạy <code>python3 bai.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bai.py</span></p><pre><code>def tach_thoi_gian(tong_phut: int) -&gt; tuple[int, int]:
+    &quot;&quot;&quot;Đổi số phút không âm thành giờ và phút.&quot;&quot;&quot;
+    if tong_phut &lt; 0:
+        raise ValueError(&quot;Số phút không được âm&quot;)
+    return tong_phut // 60, tong_phut % 60
+
+
+gio, phut = tach_thoi_gian(135)
+print(f&quot;{gio} giờ {phut} phút&quot;)</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>2 giờ 15 phút</pre></div></div></div>
+<div class="exercise" id="luyen-12-4"><h4>Bài 12.4. Báo cáo điểm bằng module</h4><p><b>Yêu cầu:</b> Tạo bao_cao.py có trung_binh() và xep_loai(). Từ main.py tính trung bình [7.0, 8.0, 9.0] rồi xếp loại: từ 8 Giỏi, từ 6.5 Khá, từ 5 Trung bình, còn lại Chưa đạt.</p><div class="guide"><b>Gợi ý từng bước:</b> Tính điểm trung bình trước rồi truyền kết quả sang hàm xếp loại.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">bao_cao.py</span></p><pre><code>def trung_binh(diem: list[float]) -&gt; float:
+    if not diem:
+        raise ValueError(&quot;Cần ít nhất một điểm&quot;)
+    return sum(diem) / len(diem)
+
+
+def xep_loai(diem: float) -&gt; str:
+    if diem &gt;= 8:
+        return &quot;Giỏi&quot;
+    if diem &gt;= 6.5:
+        return &quot;Khá&quot;
+    if diem &gt;= 5:
+        return &quot;Trung bình&quot;
+    return &quot;Chưa đạt&quot;</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from bao_cao import trung_binh, xep_loai
+
+
+def main() -&gt; None:
+    diem = trung_binh([7.0, 8.0, 9.0])
+    print(f&quot;Trung bình: {diem:.2f}&quot;)
+    print(&quot;Xếp loại:&quot;, xep_loai(diem))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Trung bình: 8.00
+Xếp loại: Giỏi</pre></div></div></div>
+<div class="exercise" id="luyen-12-5"><h4>Bài 12.5. Package quản lý tên</h4><p><b>Yêu cầu:</b> Tạo quan_ly/ten.py có chuan_hoa() bỏ khoảng trắng hai đầu và viết hoa chữ cái đầu mỗi từ. Gọi từ main.py với “  nguyen van an  ”.</p><div class="guide"><b>Gợi ý từng bước:</b> Dùng strip().title(); tạo đủ __init__.py, module và file chạy chính.</div><p><b>Cách chạy:</b> Tạo các file theo đúng đường dẫn bên dưới, trong một thư mục riêng cho bài này. Đứng tại thư mục đó và chạy <code>python3 main.py</code>.</p><button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button><div class="answer"><p><b>File:</b> <span class="file">quan_ly/__init__.py</span></p><pre><code># Package quản lý dữ liệu.</code></pre><p><b>File:</b> <span class="file">quan_ly/ten.py</span></p><pre><code>def chuan_hoa(ten: str) -&gt; str:
+    &quot;&quot;&quot;Bỏ khoảng trắng hai đầu và chuẩn hóa cách viết tên.&quot;&quot;&quot;
+    return ten.strip().title()</code></pre><p><b>File:</b> <span class="file">main.py</span></p><pre><code>from quan_ly.ten import chuan_hoa
+
+
+def main() -&gt; None:
+    print(chuan_hoa(&quot;  nguyen van an  &quot;))
+
+
+if __name__ == &quot;__main__&quot;:
+    main()</code></pre><div class="result"><b>Kết quả chương trình:</b><pre>Nguyen Van An</pre></div></div></div>
+</div>
 </section>
 </main></div>
 <script>
