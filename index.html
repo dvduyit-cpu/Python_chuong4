@@ -1,0 +1,1047 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Chương 4 Python - Bản rà soát không trùng ý</title>
+<style>
+:root{--p:#0d63ce;--p2:#1d7be3;--bg:#f4f7fb;--txt:#172033;--border:#dbe5f2;--code:#101827;--warn:#c65a11;--violet:#6d28d9;--green:#15803d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:var(--txt);line-height:1.72}
+header{position:sticky;top:0;z-index:20;background:linear-gradient(135deg,var(--p),var(--p2));color:#fff;padding:7px 18px;box-shadow:0 2px 10px rgba(0,0,0,.12)}
+header h1{margin:0;font-size:18px;line-height:1.2}header p{margin:2px 0 0;font-size:11px}
+.wrap{max-width:1480px;margin:18px auto;padding:0 14px 40px;display:grid;grid-template-columns:320px 1fr;gap:20px}
+nav{position:sticky;top:64px;align-self:start;background:#fff;border:1px solid var(--border);border-radius:16px;padding:15px;max-height:calc(100vh - 84px);overflow:auto}
+nav h3{margin-top:0;color:var(--p)}nav a{display:block;text-decoration:none;color:var(--txt);padding:8px 9px;border-radius:8px;font-size:14px}nav a:hover{background:#eef5ff;color:var(--p)}
+section{background:#fff;border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:20px;box-shadow:0 6px 18px rgba(15,23,42,.04)}
+h2{color:var(--p);margin-top:0;font-size:27px}h3{color:#23466f;margin-top:23px}h4{color:#194b8d}h5{font-size:15px;margin:12px 0 7px}
+pre{background:var(--code);color:#eef6ff;padding:15px;border-radius:12px;overflow:auto;white-space:pre-wrap;line-height:1.55}code{font-family:Consolas,monospace}
+table{width:100%;border-collapse:collapse;margin:12px 0}th,td{border:1px solid var(--border);padding:10px;text-align:left;vertical-align:top}th{background:#eef5ff}
+.note,.warn,.guide,.teacher,.result,.exercise,.demo{padding:14px 16px;border-radius:11px;margin:14px 0}.note{background:#eef5ff;border-left:5px solid var(--p)}.warn{background:#fff5eb;border-left:5px solid var(--warn)}.guide{background:#f5f3ff;border-left:5px solid var(--violet)}.teacher{background:#f0fdf4;border-left:5px solid var(--green)}.result{background:#ecfdf5;border-left:5px solid var(--green)}
+.demo{background:#f8fbff;border:2px solid #9fc3ef}.exercise{background:#fbfdff;border:1px solid #bfd0e7}.file{display:inline-block;background:#13233c;color:#fff;padding:4px 8px;border-radius:7px;font-family:Consolas,monospace}.answer{display:none;margin-top:12px;border-top:1px solid var(--border);padding-top:12px}
+button{border:0;padding:9px 12px;border-radius:8px;font-weight:bold;cursor:pointer}.btn{background:var(--p);color:#fff}.secondary{background:#eaf3ff;color:var(--p)}.toolbar{display:flex;gap:8px;flex-wrap:wrap}
+@media(max-width:1000px){.wrap{grid-template-columns:1fr}nav{position:static;max-height:none}}@media print{header,nav,button,.toolbar{display:none!important}.wrap{display:block;margin:0;padding:0}.answer{display:block!important}section{box-shadow:none}}
+</style>
+</head>
+<body>
+<header><h1>PYTHON CƠ BẢN · CHƯƠNG 4</h1><p>Bản rà soát: không trùng ý · có chú thích code · có kết quả chạy</p></header>
+<div class="wrap">
+<nav>
+<h3>MỤC LỤC</h3>
+<a href="#intro">Tổng quan</a><a href="#ham">1. Hàm</a><a href="#scope">2. Scope</a><a href="#thamso">3. Tham số</a><a href="#return">4. Return</a><a href="#doc">5. Docstring & type hints</a><a href="#lambda">6. Lambda, map, filter</a><a href="#module">7. Module & import</a><a href="#package">8. Package</a><a href="#main">9. __main__</a><a href="#pep8">10. PEP 8</a><a href="#tools">11. Formatter & linter</a><a href="#baitap">12. Bài tập</a>
+</nav>
+<main>
+<section id="intro">
+<h2>CHƯƠNG 4 – HÀM, MÔ-ĐUN, GÓI; PEP 8 VÀ TYPE HINTS</h2>
+<p><b>Thời gian:</b> 8 giờ</p>
+<div class="note"><b>Mạch kiến thức:</b> đoạn code lặp lại → hàm; nhiều hàm liên quan → module; nhiều module liên quan → package; toàn bộ code được viết rõ ràng bằng docstring, type hints và PEP 8.</div>
+<div class="teacher"><b>Cách giảng:</b> mỗi khái niệm trong bản này chỉ xuất hiện một lần. Phần lý thuyết được mở rộng từ khái niệm → lý do dùng → cách hoạt động → khi nào nên dùng → ví dụ. Các đoạn code đều có chú thích giải thích gần như từng bước, và có kết quả chạy ngay bên dưới để sinh viên đối chiếu.</div>
+<div class="toolbar"><button onclick="showAll()">Hiện tất cả lời giải</button><button class="secondary" onclick="hideAll()">Ẩn tất cả lời giải</button><button class="secondary" onclick="window.print()">In bài giảng</button></div>
+</section>
+
+<section id="ham">
+
+<h2>1. HÀM – KHÁI NIỆM, CÁCH HOẠT ĐỘNG VÀ CÁCH DÙNG</h2>
+
+<h3>1.1. Hàm là gì?</h3>
+<p>Hàm là một nhóm câu lệnh được đặt tên để thực hiện một nhiệm vụ cụ thể. Khi cần thực hiện nhiệm vụ đó, ta chỉ cần gọi tên hàm thay vì viết lại toàn bộ đoạn code.</p>
+
+<p>Ví dụ, nếu chương trình cần tính điểm trung bình cho nhiều sinh viên, thay vì viết công thức tính trung bình ở nhiều nơi, ta tạo một hàm <code>calculate_average()</code> và gọi lại mỗi khi cần.</p>
+
+<div class="teacher">
+<b>Cách giải thích cho sinh viên:</b> có thể xem hàm như một “máy xử lý”. Ta đưa dữ liệu vào máy, máy xử lý, sau đó cho ra kết quả. Phần dữ liệu đưa vào là <b>tham số</b>, phần kết quả trả ra thường dùng <b>return</b>.
+</div>
+
+<h3>1.2. Vì sao nên dùng hàm?</h3>
+<ul>
+<li><b>Giảm lặp code:</b> một đoạn xử lý chỉ viết một lần.</li>
+<li><b>Dễ đọc:</b> tên hàm cho biết chương trình đang làm gì.</li>
+<li><b>Dễ sửa:</b> thay đổi logic tại một chỗ.</li>
+<li><b>Dễ kiểm thử:</b> có thể chạy thử từng hàm riêng.</li>
+<li><b>Dễ tái sử dụng:</b> một hàm có thể được gọi nhiều nơi hoặc import sang file khác.</li>
+</ul>
+
+<h3>1.3. Cú pháp định nghĩa hàm</h3>
+<pre><code># Dùng từ khóa def để bắt đầu định nghĩa một hàm
+# greet là tên hàm
+# () là nơi khai báo tham số nếu có
+def greet():
+    # Các dòng thụt vào 4 khoảng trắng thuộc về hàm
+    print("Xin chào")
+
+
+# Định nghĩa hàm chưa làm hàm chạy
+# Phải gọi hàm bằng tên hàm kèm ()
+greet()</code></pre>
+
+<div class="result"><b>Kết quả chạy:</b><pre>Xin chào</pre></div>
+
+<h3>1.4. Python chạy hàm như thế nào?</h3>
+<ol>
+<li>Python đọc dòng <code>def greet():</code> và ghi nhớ hàm.</li>
+<li>Python chưa chạy lệnh <code>print()</code> bên trong ngay.</li>
+<li>Khi gặp <code>greet()</code>, Python đi vào hàm.</li>
+<li>Python thực hiện các lệnh trong hàm từ trên xuống.</li>
+<li>Khi hàm kết thúc, Python quay lại dòng sau nơi gọi hàm.</li>
+</ol>
+
+<h3>1.5. Hàm có tham số</h3>
+<p>Tham số giúp một hàm xử lý được nhiều dữ liệu khác nhau.</p>
+
+<pre><code># name là tham số
+# Mỗi lần gọi hàm, name có thể nhận một giá trị khác nhau
+def greet(name):
+    # Dùng f-string để ghép giá trị name vào chuỗi
+    print(f"Xin chào {name}")
+
+
+# "An" được truyền vào tham số name
+greet("An")
+
+# "Bình" được truyền vào tham số name ở lần gọi tiếp theo
+greet("Bình")</code></pre>
+
+<div class="result"><b>Kết quả chạy:</b><pre>Xin chào An
+Xin chào Bình</pre></div>
+
+<h3>1.6. Hàm không có return và hàm có return</h3>
+<p>Một hàm có thể chỉ thực hiện hành động, ví dụ in ra màn hình. Nhưng nếu muốn lấy kết quả để dùng tiếp, ta cần <code>return</code>.</p>
+
+<pre><code># Hàm này chỉ hiển thị kết quả
+def show_sum(a, b):
+    print(a + b)
+
+
+# Hàm này trả kết quả về nơi gọi
+def calculate_sum(a, b):
+    return a + b
+
+
+show_sum(3, 5)
+
+result = calculate_sum(3, 5)
+
+# Vì calculate_sum có return nên ta có thể dùng result tiếp
+print("Nhân đôi kết quả:", result * 2)</code></pre>
+
+<div class="result"><b>Kết quả chạy:</b><pre>8
+Nhân đôi kết quả: 16</pre></div>
+
+<h3>1.7. Khi nào nên tạo một hàm?</h3>
+<ul>
+<li>Khi một đoạn code thực hiện một nhiệm vụ có tên rõ ràng.</li>
+<li>Khi đoạn code đó lặp lại từ hai lần trở lên.</li>
+<li>Khi chương trình quá dài và cần chia nhỏ.</li>
+<li>Khi cần kiểm thử riêng từng phần.</li>
+</ul>
+
+<div class="warn">
+<b>Không nên:</b> tạo một hàm vừa nhập dữ liệu, vừa tính toán, vừa ghi file, vừa gửi email, vừa in báo cáo. Một hàm tốt nên tập trung vào một nhiệm vụ chính.
+</div>
+
+<div class="exercise">
+<h4>Bài thực hành – Viết hàm tính diện tích hình chữ nhật</h4>
+<p><b>Tên file:</b> <span class="file">bt01_rectangle_area.py</span></p>
+<div class="guide">
+<ol>
+<li>Tạo hàm <code>rectangle_area(length, width)</code>.</li>
+<li>Bên trong hàm tính <code>length * width</code>.</li>
+<li>Dùng <code>return</code> để trả kết quả.</li>
+<li>Bên ngoài nhập chiều dài và chiều rộng.</li>
+<li>Gọi hàm và in kết quả.</li>
+</ol>
+</div>
+<button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button>
+<div class="answer">
+<pre><code># Tạo hàm có hai tham số: length và width
+def rectangle_area(length, width):
+    # Tính diện tích bằng công thức dài × rộng
+    area = length * width
+
+    # Dùng return vì ta muốn gửi kết quả ra ngoài hàm
+    return area
+
+
+# input() luôn trả chuỗi
+# Vì cần tính toán nên chuyển sang float
+length = float(input("Nhập chiều dài: "))
+width = float(input("Nhập chiều rộng: "))
+
+# Gọi hàm và lưu kết quả trả về
+result = rectangle_area(length, width)
+
+# Hiển thị kết quả
+print(f"Diện tích = {result}")</code></pre>
+<div class="result"><b>Ví dụ chạy:</b><pre>Nhập chiều dài: 5
+Nhập chiều rộng: 3
+Diện tích = 15.0</pre></div>
+</div>
+</div>
+
+</section>
+
+<section id="scope">
+
+<h2>2. SCOPE – PHẠM VI BIẾN, LOCAL VÀ GLOBAL</h2>
+
+<h3>2.1. Scope là gì?</h3>
+<p>Scope là phạm vi mà một biến có thể được truy cập. Không phải biến nào cũng có thể dùng ở mọi vị trí trong chương trình.</p>
+
+<h3>2.2. Biến cục bộ – local variable</h3>
+<p>Biến được tạo bên trong hàm thường chỉ tồn tại trong hàm đó.</p>
+
+<pre><code>def show_student():
+    # student_name được tạo bên trong hàm
+    # nên đây là biến cục bộ
+    student_name = "An"
+
+    # Dùng được vì đang ở trong phạm vi của hàm
+    print(student_name)
+
+
+show_student()
+
+# Dòng dưới sẽ lỗi nếu bỏ dấu #
+# vì student_name không tồn tại ngoài hàm
+# print(student_name)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>An</pre></div>
+
+<h3>2.3. Biến toàn cục – global variable</h3>
+<p>Biến được tạo ngoài tất cả hàm được gọi là biến toàn cục. Hàm có thể đọc biến này.</p>
+
+<pre><code># school_name là biến toàn cục
+school_name = "BDU"
+
+
+def show_school():
+    # Hàm có thể đọc biến toàn cục
+    print("Trường:", school_name)
+
+
+show_school()
+
+# Biến toàn cục cũng dùng được ở đây
+print("Ngoài hàm:", school_name)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Trường: BDU
+Ngoài hàm: BDU</pre></div>
+
+<h3>2.4. Khi nào cần từ khóa global?</h3>
+<p>Nếu chỉ đọc biến toàn cục thì không cần <code>global</code>. Nếu muốn thay đổi trực tiếp biến toàn cục bên trong hàm, phải khai báo <code>global</code>.</p>
+
+<pre><code># Biến toàn cục
+count = 0
+
+
+def increase():
+    # Báo cho Python rằng count bên dưới
+    # là biến count ở ngoài hàm, không phải biến cục bộ mới
+    global count
+
+    # Tăng biến toàn cục lên 1
+    count += 1
+
+
+increase()
+increase()
+
+print(count)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>2</pre></div>
+
+<h3>2.5. Vì sao không nên lạm dụng global?</h3>
+<ul>
+<li>Khó biết hàm nào đã thay đổi dữ liệu.</li>
+<li>Khó kiểm thử độc lập từng hàm.</li>
+<li>Dễ sinh lỗi khi dự án lớn.</li>
+</ul>
+
+<div class="teacher">
+<b>Cách giải thích dễ hiểu:</b> local giống tài liệu riêng trong một phòng; global giống bảng thông báo chung. Nếu ai cũng sửa bảng chung thì rất khó kiểm soát thay đổi.
+</div>
+
+<div class="note">
+<b>Khuyến nghị:</b> ưu tiên truyền dữ liệu vào hàm qua tham số và lấy dữ liệu ra bằng return thay vì dùng global.
+</div>
+
+</section>
+
+<section id="thamso">
+
+<h2>3. THAM SỐ VÀ ĐỐI SỐ</h2>
+
+<h3>3.1. Parameter và argument khác nhau thế nào?</h3>
+<p><b>Parameter</b> là tên biến trong phần định nghĩa hàm. <b>Argument</b> là giá trị thật được truyền vào khi gọi hàm.</p>
+
+<pre><code># name và age là parameter
+def introduce(name, age):
+    print(name, age)
+
+
+# "An" và 18 là argument
+introduce("An", 18)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>An 18</pre></div>
+
+<h3>3.2. Positional arguments</h3>
+<p>Giá trị được gán cho tham số theo vị trí.</p>
+
+<pre><code>def introduce(name, age):
+    print("Tên:", name)
+    print("Tuổi:", age)
+
+
+# "An" đứng vị trí thứ nhất → gán cho name
+# 18 đứng vị trí thứ hai → gán cho age
+introduce("An", 18)</code></pre>
+
+<div class="warn">
+Nếu gọi <code>introduce(18, "An")</code> thì chương trình vẫn có thể chạy nhưng dữ liệu bị gán sai ý nghĩa.
+</div>
+
+<h3>3.3. Keyword arguments</h3>
+<p>Keyword arguments truyền dữ liệu theo tên tham số.</p>
+
+<pre><code>def introduce(name, age):
+    print("Tên:", name)
+    print("Tuổi:", age)
+
+
+# Vì ghi rõ age= và name=
+# nên thứ tự khi truyền không còn quan trọng
+introduce(age=18, name="An")</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Tên: An
+Tuổi: 18</pre></div>
+
+<h3>3.4. Default parameter</h3>
+<p>Tham số mặc định giúp hàm có một giá trị sẵn nếu người gọi không truyền.</p>
+
+<pre><code># message có giá trị mặc định là "Xin chào"
+def greet(name, message="Xin chào"):
+    print(f"{message} {name}")
+
+
+# Không truyền message → dùng giá trị mặc định
+greet("An")
+
+# Có truyền message → giá trị mới ghi đè mặc định
+greet("Bình", "Chào buổi sáng")</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Xin chào An
+Chào buổi sáng Bình</pre></div>
+
+<h3>3.5. *args – số lượng đối số vị trí linh hoạt</h3>
+<p><code>*args</code> dùng khi chưa biết trước người gọi sẽ truyền bao nhiêu đối số vị trí.</p>
+
+<pre><code># *numbers gom tất cả đối số vị trí thành tuple
+def total(*numbers):
+    # sum() cộng toàn bộ phần tử trong tuple
+    return sum(numbers)
+
+
+print(total(1, 2))
+print(total(1, 2, 3, 4, 5))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>3
+15</pre></div>
+
+<h3>3.6. **kwargs – số lượng đối số theo tên linh hoạt</h3>
+<p><code>**kwargs</code> gom các cặp <code>ten=gia_tri</code> thành dictionary.</p>
+
+<pre><code># **info nhận dữ liệu dạng key=value
+def show_info(**info):
+    # info là dictionary
+    for key, value in info.items():
+        print(f"{key}: {value}")
+
+
+show_info(
+    name="An",
+    age=18,
+    city="Ca Mau"
+)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>name: An
+age: 18
+city: Ca Mau</pre></div>
+
+<h3>3.7. Khi nào dùng loại nào?</h3>
+<table>
+<tr><th>Loại</th><th>Khi nên dùng</th></tr>
+<tr><td>Positional</td><td>Ít tham số, thứ tự rõ</td></tr>
+<tr><td>Keyword</td><td>Nhiều tham số, muốn dễ đọc</td></tr>
+<tr><td>Default</td><td>Có giá trị thường dùng</td></tr>
+<tr><td>*args</td><td>Số lượng đối số vị trí thay đổi</td></tr>
+<tr><td>**kwargs</td><td>Thông tin linh hoạt dạng tên=giá trị</td></tr>
+</table>
+
+</section>
+
+<section id="return">
+
+<h2>4. RETURN – TRẢ KẾT QUẢ TỪ HÀM</h2>
+
+<h3>4.1. Vì sao cần return?</h3>
+<p><code>print()</code> chỉ hiển thị dữ liệu. <code>return</code> đưa dữ liệu ra khỏi hàm để chương trình có thể lưu, tính tiếp hoặc truyền sang hàm khác.</p>
+
+<pre><code># Hàm chỉ hiển thị
+def show_sum(a, b):
+    print(a + b)
+
+
+# Hàm trả giá trị
+def calculate_sum(a, b):
+    return a + b
+
+
+show_sum(3, 5)
+
+# calculate_sum trả về 8
+# nên ta lưu được vào result
+result = calculate_sum(3, 5)
+
+# Có thể tiếp tục dùng result
+print("Nhân đôi:", result * 2)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>8
+Nhân đôi: 16</pre></div>
+
+<h3>4.2. return làm hàm kết thúc ngay</h3>
+<pre><code>def check_number(number):
+    # Nếu số âm, trả kết quả ngay
+    if number < 0:
+        return "Số âm"
+
+    # Chỉ chạy nếu điều kiện trên không return
+    return "Không âm"
+
+
+print(check_number(-5))
+print(check_number(8))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Số âm
+Không âm</pre></div>
+
+<h3>4.3. Hàm không có return rõ ràng sẽ trả về None</h3>
+<pre><code>def hello():
+    print("Xin chào")
+
+
+result = hello()
+
+# Vì hàm không return nên result nhận None
+print("Giá trị trả về:", result)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Xin chào
+Giá trị trả về: None</pre></div>
+
+<h3>4.4. Trả về nhiều giá trị</h3>
+<pre><code>def calculate(a, b):
+    # Python gom 3 giá trị thành một tuple
+    return a + b, a - b, a * b
+
+
+# Giải nén tuple thành 3 biến
+sum_value, diff_value, product = calculate(10, 3)
+
+print("Tổng:", sum_value)
+print("Hiệu:", diff_value)
+print("Tích:", product)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Tổng: 13
+Hiệu: 7
+Tích: 30</pre></div>
+
+</section>
+
+<section id="doc">
+
+<h2>5. DOCSTRING VÀ TYPE HINTS</h2>
+
+<h3>5.1. Docstring là gì?</h3>
+<p>Docstring là phần mô tả chính thức của hàm, class hoặc module. Nó được đặt ngay sau dòng định nghĩa.</p>
+
+<pre><code>def add(a, b):
+    """
+    Trả về tổng của hai số.
+    """
+    return a + b</code></pre>
+
+<h3>5.2. Docstring đầy đủ</h3>
+<pre><code>def rectangle_area(length, width):
+    """
+    Tính diện tích hình chữ nhật.
+
+    Args:
+        length: Chiều dài.
+        width: Chiều rộng.
+
+    Returns:
+        Diện tích hình chữ nhật.
+    """
+    return length * width</code></pre>
+
+<h3>5.3. Docstring khác comment thế nào?</h3>
+<table>
+<tr><th>Comment #</th><th>Docstring</th></tr>
+<tr><td>Giải thích cho người đọc code</td><td>Mô tả chính thức hàm/module/class</td></tr>
+<tr><td>Không được help() đọc</td><td>Có thể xem bằng help()</td></tr>
+</table>
+
+<h3>5.4. Type hints là gì?</h3>
+<p>Type hints là cách ghi chú kiểu dữ liệu mong đợi cho tham số và kiểu dữ liệu trả về.</p>
+
+<pre><code># a: int nghĩa là a dự kiến là số nguyên
+# b: int nghĩa là b dự kiến là số nguyên
+# -> int nghĩa là hàm dự kiến trả về số nguyên
+def add(a: int, b: int) -> int:
+    return a + b
+
+
+print(add(4, 6))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>10</pre></div>
+
+<h3>5.5. Type hints không ép kiểu</h3>
+<p>Python vẫn là ngôn ngữ động. Type hints giúp IDE và công cụ kiểm tra hiểu ý định của lập trình viên, nhưng Python không tự chặn hoàn toàn việc truyền sai kiểu.</p>
+
+<h3>5.6. Type hints với list</h3>
+<pre><code># scores là danh sách các số thực
+# Hàm trả về float
+def average(scores: list[float]) -> float:
+    # sum() cộng tất cả điểm
+    # len() đếm số lượng điểm
+    return sum(scores) / len(scores)
+
+
+result = average([7.5, 8.0, 6.5])
+
+print(f"{result:.2f}")</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>7.33</pre></div>
+
+<h3>5.7. Khi nào nên dùng type hints?</h3>
+<ul>
+<li>Dự án có nhiều file.</li>
+<li>Làm việc nhóm.</li>
+<li>Hàm có nhiều tham số.</li>
+<li>Muốn IDE cảnh báo lỗi sớm.</li>
+</ul>
+
+</section>
+
+<section id="lambda">
+
+<h2>6. LAMBDA, MAP() VÀ FILTER()</h2>
+
+<h3>6.1. Lambda là gì?</h3>
+<p>Lambda là cách tạo hàm ngắn, thường không cần đặt tên bằng <code>def</code>.</p>
+
+<pre><code># lambda x: x ** 2
+# x là tham số
+# x ** 2 là biểu thức được trả về
+square = lambda x: x ** 2
+
+print(square(5))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>25</pre></div>
+
+<h3>6.2. Lambda tương đương def</h3>
+<pre><code>def square(x):
+    return x ** 2</code></pre>
+
+<h3>6.3. Khi nào nên dùng lambda?</h3>
+<ul>
+<li>Hàm rất ngắn.</li>
+<li>Chỉ dùng một lần.</li>
+<li>Dùng kèm <code>map()</code>, <code>filter()</code>, <code>sorted()</code>.</li>
+</ul>
+
+<div class="warn">
+Nếu logic dài hoặc có nhiều bước, nên dùng <code>def</code> vì dễ đọc hơn.
+</div>
+
+<h3>6.4. map()</h3>
+<p><code>map()</code> áp dụng một hàm cho từng phần tử.</p>
+
+<pre><code># Danh sách ban đầu
+numbers = [1, 2, 3, 4]
+
+# map() lấy từng số và đưa vào lambda
+# lambda trả lại bình phương của số đó
+# list() chuyển kết quả map thành danh sách
+squares = list(
+    map(lambda x: x ** 2, numbers)
+)
+
+print(squares)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>[1, 4, 9, 16]</pre></div>
+
+<h3>6.5. filter()</h3>
+<p><code>filter()</code> giữ lại những phần tử mà hàm điều kiện trả về True.</p>
+
+<pre><code>scores = [4, 5, 7, 8, 3, 9]
+
+# Với mỗi score:
+# nếu score >= 5 thì lambda trả True
+# filter() giữ lại score đó
+passed_scores = list(
+    filter(lambda score: score >= 5, scores)
+)
+
+print(passed_scores)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>[5, 7, 8, 9]</pre></div>
+
+<h3>6.6. So sánh map/filter với comprehension</h3>
+<table>
+<tr><th>Mục đích</th><th>map/filter</th><th>Comprehension</th></tr>
+<tr><td>Bình phương</td><td><code>map(lambda x: x**2, data)</code></td><td><code>[x**2 for x in data]</code></td></tr>
+<tr><td>Lọc điểm</td><td><code>filter(lambda x: x>=5, data)</code></td><td><code>[x for x in data if x>=5]</code></td></tr>
+</table>
+
+<div class="teacher">
+Với sinh viên mới học, nên cho các bạn hiểu map/filter trước, sau đó so sánh với comprehension để biết cách nào dễ đọc hơn.
+</div>
+
+</section>
+
+<section id="module">
+
+<h2>7. MÔ-ĐUN VÀ IMPORT</h2>
+
+<h3>7.1. Mô-đun là gì?</h3>
+<p>Mỗi file Python <code>.py</code> có thể được xem là một mô-đun. Mô-đun thường chứa các hàm hoặc class cùng chủ đề.</p>
+
+<h3>7.2. Vì sao cần module?</h3>
+<ul>
+<li>Không để một file quá dài.</li>
+<li>Nhóm chức năng liên quan.</li>
+<li>Tái sử dụng code.</li>
+<li>Dễ bảo trì.</li>
+</ul>
+
+<h3>7.3. import module</h3>
+<pre><code># Nạp module math có sẵn của Python
+import math
+
+# Vì import cả module nên phải gọi theo dạng math.ten_ham
+print(math.sqrt(16))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>4.0</pre></div>
+
+<h3>7.4. from ... import ...</h3>
+<pre><code># Chỉ lấy riêng hàm sqrt từ module math
+from math import sqrt
+
+# Vì đã import trực tiếp nên không cần viết math.
+print(sqrt(16))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>4.0</pre></div>
+
+<h3>7.5. as – bí danh</h3>
+<pre><code># Đặt bí danh m cho module math
+import math as m
+
+# Dùng m thay cho math
+print(m.sqrt(16))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>4.0</pre></div>
+
+<h3>7.6. Module tự tạo</h3>
+<p>Cấu trúc:</p>
+<pre><code>project/
+├── calculator.py
+└── main.py</code></pre>
+
+<p><b>calculator.py</b></p>
+<pre><code># Hàm cộng
+def add(a, b):
+    return a + b
+
+
+# Hàm trừ
+def subtract(a, b):
+    return a - b</code></pre>
+
+<p><b>main.py</b></p>
+<pre><code># Import module do chính ta tạo
+import calculator
+
+# Gọi hàm thông qua tên module
+print(calculator.add(10, 3))
+print(calculator.subtract(10, 3))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>13
+7</pre></div>
+
+<div class="warn">
+Không nên dùng <code>from module import *</code> vì khó biết tên nào được import từ đâu.
+</div>
+
+</section>
+
+<section id="package">
+
+<h2>8. PACKAGE VÀ CẤU TRÚC DỰ ÁN</h2>
+
+<h3>8.1. Package là gì?</h3>
+<p>Package là thư mục chứa nhiều module liên quan.</p>
+
+<pre><code>my_project/
+├── main.py
+└── utils/
+    ├── __init__.py
+    ├── math_utils.py
+    └── text_utils.py</code></pre>
+
+<h3>8.2. Ý nghĩa từng file</h3>
+<table>
+<tr><th>File</th><th>Vai trò</th></tr>
+<tr><td><code>main.py</code></td><td>Điểm bắt đầu chạy chương trình</td></tr>
+<tr><td><code>math_utils.py</code></td><td>Các hàm toán học</td></tr>
+<tr><td><code>text_utils.py</code></td><td>Các hàm xử lý chuỗi</td></tr>
+<tr><td><code>__init__.py</code></td><td>Đánh dấu/khởi tạo package</td></tr>
+</table>
+
+<h3>8.3. Import từ package</h3>
+<pre><code># Lấy riêng hàm average
+# từ module math_utils
+# nằm trong package utils
+from utils.math_utils import average
+
+
+scores = [7.0, 8.0, 9.0]
+
+print(average(scores))</code></pre>
+
+<h3>8.4. Khi nào nên dùng package?</h3>
+<ul>
+<li>Dự án đã có nhiều module.</li>
+<li>Cần chia theo nhóm chức năng.</li>
+<li>Dự án phát triển lâu dài.</li>
+</ul>
+
+<div class="teacher">
+Có thể giải thích: hàm = nhân viên; module = phòng ban; package = đơn vị gồm nhiều phòng ban.
+</div>
+
+</section>
+
+<section id="main">
+
+<h2>9. __name__ == "__main__"</h2>
+
+<h3>9.1. __name__ là gì?</h3>
+<p>Mỗi file Python có biến đặc biệt <code>__name__</code>.</p>
+
+<ul>
+<li>Nếu file chạy trực tiếp: <code>__name__ == "__main__"</code></li>
+<li>Nếu file được import: <code>__name__</code> bằng tên module</li>
+</ul>
+
+<h3>9.2. Tại sao cần main guard?</h3>
+<p>Để code chạy thử hoặc code chính không tự chạy khi module được import.</p>
+
+<pre><code># Tạo hàm main để gom phần chạy chính
+def main():
+    print("Chương trình chính")
+
+
+# Chỉ gọi main() nếu file này được chạy trực tiếp
+# Nếu file này chỉ được import thì điều kiện sai
+if __name__ == "__main__":
+    main()</code></pre>
+
+<div class="result"><b>Kết quả khi chạy trực tiếp:</b><pre>Chương trình chính</pre></div>
+
+<h3>9.3. Cấu trúc file nên dùng</h3>
+<pre><code># Các import
+import math
+
+
+# Các hàm hỗ trợ
+def helper():
+    pass
+
+
+# Hàm chính
+def main():
+    pass
+
+
+# Điểm bắt đầu khi chạy trực tiếp
+if __name__ == "__main__":
+    main()</code></pre>
+
+<div class="teacher">
+<b>Cách nói với sinh viên:</b> câu này hỏi “file này đang tự chạy hay chỉ đang được file khác mượn dùng?”.
+</div>
+
+</section>
+
+<section id="pep8">
+
+<h2>10. PEP 8 – VIẾT CODE DỄ ĐỌC VÀ NHẤT QUÁN</h2>
+
+<h3>10.1. PEP 8 là gì?</h3>
+<p>PEP 8 là hướng dẫn phong cách viết Python. Đây không phải cú pháp bắt buộc, nhưng giúp code dễ đọc, dễ sửa và dễ làm việc nhóm.</p>
+
+<h3>10.2. Đặt tên</h3>
+<table>
+<tr><th>Đối tượng</th><th>Quy ước</th><th>Ví dụ</th></tr>
+<tr><td>Biến</td><td>snake_case</td><td><code>student_name</code></td></tr>
+<tr><td>Hàm</td><td>snake_case</td><td><code>calculate_average()</code></td></tr>
+<tr><td>Class</td><td>PascalCase</td><td><code>StudentManager</code></td></tr>
+<tr><td>Hằng số</td><td>UPPER_CASE</td><td><code>MAX_SCORE</code></td></tr>
+</table>
+
+<h3>10.3. Khoảng trắng</h3>
+<p>Nên:</p>
+<pre><code>total = price * quantity</code></pre>
+
+<p>Không nên:</p>
+<pre><code>total=price*quantity</code></pre>
+
+<h3>10.4. Thụt lề</h3>
+<p>Dùng 4 khoảng trắng cho khối lệnh.</p>
+
+<h3>10.5. Import</h3>
+<p>Import nên đặt ở đầu file.</p>
+
+<h3>10.6. Comment</h3>
+<p>Comment nên giải thích lý do hoặc mục đích, không chỉ lặp lại câu lệnh.</p>
+
+<pre><code># Chưa tốt: comment chỉ lặp lại code
+# cộng a và b
+total = a + b
+
+
+# Tốt hơn: giải thích ý nghĩa nghiệp vụ
+# Cộng học phí và phí dịch vụ để tính tổng phải thanh toán
+total = tuition_fee + service_fee</code></pre>
+
+<h3>10.7. Ví dụ code rõ ràng</h3>
+<pre><code># Tên biến rõ nghĩa
+unit_price = 15000
+quantity = 3
+
+# Có khoảng trắng quanh toán tử
+total_payment = unit_price * quantity
+
+print(total_payment)</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>45000</pre></div>
+
+</section>
+
+<section id="tools">
+
+<h2>11. FORMATTER VÀ LINTER</h2>
+
+<h3>11.1. Formatter là gì?</h3>
+<p>Formatter tự động sửa hình thức trình bày code.</p>
+<ul>
+<li>Black</li>
+<li>autopep8</li>
+</ul>
+
+<h3>11.2. Linter là gì?</h3>
+<p>Linter phân tích code và đưa ra cảnh báo về lỗi phong cách hoặc lỗi tiềm ẩn.</p>
+<ul>
+<li>Ruff</li>
+<li>Flake8</li>
+<li>Pylint</li>
+</ul>
+
+<h3>11.3. So sánh</h3>
+<table>
+<tr><th>Formatter</th><th>Linter</th></tr>
+<tr><td>Tự chỉnh format</td><td>Phát hiện và cảnh báo</td></tr>
+<tr><td>Ví dụ Black</td><td>Ví dụ Ruff</td></tr>
+</table>
+
+<h3>11.4. Khi nào nên dùng?</h3>
+<ul>
+<li>Dự án nhóm.</li>
+<li>Dự án nhiều file.</li>
+<li>Code đưa lên GitHub.</li>
+<li>Muốn kiểm soát chất lượng code.</li>
+</ul>
+
+<div class="note">
+Trong dự án thực tế, thường dùng cả formatter và linter.
+</div>
+
+</section>
+
+<section id="baitap">
+
+<h2>12. BÀI TẬP THỰC HÀNH – CÓ GỢI Ý VÀ CODE CHÚ THÍCH</h2>
+
+<div class="exercise">
+<h4>Bài 1. Hàm tính điểm trung bình</h4>
+<p><b>Tên file:</b> <span class="file">bt01_average.py</span></p>
+<div class="guide">
+<ol>
+<li>Tạo hàm <code>average(scores)</code>.</li>
+<li>scores là list các số thực.</li>
+<li>Dùng <code>sum(scores)</code> và <code>len(scores)</code>.</li>
+<li>Dùng return.</li>
+<li>Bên ngoài gọi hàm và in kết quả.</li>
+</ol>
+</div>
+<button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button>
+<div class="answer">
+<pre><code># scores: list[float] giúp người đọc biết
+# hàm mong đợi một danh sách số thực
+def average(scores: list[float]) -> float:
+    # sum(scores) cộng toàn bộ điểm
+    total = sum(scores)
+
+    # len(scores) đếm số lượng điểm
+    count = len(scores)
+
+    # Trả trung bình ra ngoài hàm
+    return total / count
+
+
+# Danh sách dữ liệu mẫu
+scores = [7.0, 8.0, 9.0]
+
+# Gọi hàm và lưu kết quả
+result = average(scores)
+
+# :.2f hiển thị 2 chữ số thập phân
+print(f"Điểm trung bình: {result:.2f}")</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Điểm trung bình: 8.00</pre></div>
+</div>
+</div>
+
+<div class="exercise">
+<h4>Bài 2. Hàm xếp loại</h4>
+<p><b>Tên file:</b> <span class="file">bt02_classify.py</span></p>
+<div class="guide">
+<ol>
+<li>Tạo hàm <code>classify(score)</code>.</li>
+<li>Nếu score >= 8 return "Giỏi".</li>
+<li>Nếu >= 6.5 return "Khá".</li>
+<li>Nếu >= 5 return "Trung bình".</li>
+<li>Còn lại return "Chưa đạt".</li>
+</ol>
+</div>
+<button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button>
+<div class="answer">
+<pre><code>def classify(score: float) -> str:
+    # Kiểm tra mức cao nhất trước
+    if score >= 8:
+        return "Giỏi"
+
+    # Nếu không đạt Giỏi, kiểm tra Khá
+    if score >= 6.5:
+        return "Khá"
+
+    # Nếu không đạt Khá, kiểm tra Trung bình
+    if score >= 5:
+        return "Trung bình"
+
+    # Nếu không thuộc các trường hợp trên
+    return "Chưa đạt"
+
+
+print(classify(7.2))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Khá</pre></div>
+</div>
+</div>
+
+<div class="exercise">
+<h4>Bài 3. Module tự tạo</h4>
+<p><b>Tên file:</b> <span class="file">my_math.py + main.py</span></p>
+<div class="guide">
+<ol>
+<li>Tạo file <code>my_math.py</code>.</li>
+<li>Viết hàm add() và multiply().</li>
+<li>Tạo file <code>main.py</code> cùng thư mục.</li>
+<li>Import module.</li>
+<li>Gọi hai hàm.</li>
+</ol>
+</div>
+<button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button>
+<div class="answer">
+<pre><code># FILE: my_math.py
+
+# Hàm cộng hai số
+def add(a, b):
+    return a + b
+
+
+# Hàm nhân hai số
+def multiply(a, b):
+    return a * b</code></pre>
+
+<pre><code># FILE: main.py
+
+# Import module do ta tự tạo
+import my_math
+
+
+# Gọi hàm add thông qua tên module
+print(my_math.add(3, 5))
+
+# Gọi hàm multiply thông qua tên module
+print(my_math.multiply(3, 5))</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>8
+15</pre></div>
+</div>
+</div>
+
+<div class="exercise">
+<h4>Bài 4. Chương trình hoàn chỉnh dùng main()</h4>
+<p><b>Tên file:</b> <span class="file">bt04_main_program.py</span></p>
+<div class="guide">
+<ol>
+<li>Tạo hàm average().</li>
+<li>Tạo hàm main().</li>
+<li>Trong main chuẩn bị dữ liệu và gọi average().</li>
+<li>Dùng main guard.</li>
+</ol>
+</div>
+<button class="btn" onclick="toggleAnswer(this)">Xem lời giải tham khảo</button>
+<div class="answer">
+<pre><code>def average(scores: list[float]) -> float:
+    # Trả điểm trung bình
+    return sum(scores) / len(scores)
+
+
+def main() -> None:
+    # Dữ liệu của chương trình chính
+    scores = [7.5, 8.0, 6.5, 9.0]
+
+    # Gọi hàm tính trung bình
+    result = average(scores)
+
+    # Hiển thị kết quả
+    print(f"Điểm trung bình: {result:.2f}")
+
+
+# Chỉ chạy main nếu file được chạy trực tiếp
+if __name__ == "__main__":
+    main()</code></pre>
+
+<div class="result"><b>Kết quả:</b><pre>Điểm trung bình: 7.75</pre></div>
+</div>
+</div>
+
+</section>
+</main></div>
+<script>
+function toggleAnswer(btn){const a=btn.nextElementSibling;const show=a.style.display!=="block";a.style.display=show?"block":"none";btn.textContent=show?"Ẩn lời giải tham khảo":"Xem lời giải tham khảo"}
+function showAll(){document.querySelectorAll('.answer').forEach(x=>x.style.display='block')}
+function hideAll(){document.querySelectorAll('.answer').forEach(x=>x.style.display='none')}
+</script>
+</body></html>
